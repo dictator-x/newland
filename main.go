@@ -1,16 +1,16 @@
 package main
 
 import (
-	"github.com/golang/protobuf/proto"
-	"github.com/dictator-x/newland/pb"
-	"time"
+	"encoding/json"
 	"errors"
+	"fmt"
+	"github.com/dictator-x/newland/pb"
+	"github.com/golang/protobuf/proto"
+	"github.com/shopspring/decimal"
 	"strconv"
 	"strings"
-	"github.com/shopspring/decimal"
-	"fmt"
+	"time"
 	"unsafe"
-	"encoding/json"
 )
 
 func basicDemo() {
@@ -45,7 +45,7 @@ func basicDemo() {
 	var num2 float64 = 4.2
 
 	d1 := decimal.NewFromFloat(num1).Add(decimal.NewFromFloat(num2))
-	fmt.Printf("%v--%T\n",d1, d1)
+	fmt.Printf("%v--%T\n", d1, d1)
 
 	aa := 10
 	bb := float64(aa)
@@ -58,9 +58,9 @@ func basicDemo() {
 	fmt.Println(s1)
 
 	var s2 string = `hello
-	world
-	`
-	fmt.Println(s2+s1)
+  world
+  `
+	fmt.Println(s2 + s1)
 	var s3 = "123-345-546"
 	arr := strings.Split(s3, "-")
 	fmt.Println(arr)
@@ -97,7 +97,7 @@ func basicDemo() {
 	var ccc int32 = '豪'
 	fmt.Println(string(runeStr))
 	fmt.Println(ccc)
-	fmt.Println(333+'你')
+	fmt.Println(333 + '你')
 
 	var vi int = 20
 	var vf float64 = 12.456
@@ -123,7 +123,7 @@ func basicDemo() {
 	ssa := "123456"
 	fmt.Printf("%v-%T\n", ssa, ssa)
 	fmt.Println(strconv.ParseInt(ssa, 10, 64))
-	fmt.Println(5.0/2)
+	fmt.Println(5.0 / 2)
 
 	bbb := true || false
 	fmt.Println(bbb)
@@ -140,7 +140,7 @@ func basicDemo() {
 		fmt.Println(num, "has multiple digits")
 	}
 
-	arr3 := [...]string{"aaa", "bbb","ccc"}
+	arr3 := [...]string{"aaa", "bbb", "ccc"}
 	fmt.Println(arr3)
 	fmt.Println(len(arr3))
 
@@ -152,7 +152,7 @@ func basicDemo() {
 	switch extname := ".html"; extname {
 	case ".html":
 		fmt.Println("text/html")
-  	case ".css":
+	case ".css":
 		fmt.Println("text/css")
 	case ".js":
 		fmt.Println("text/javascript")
@@ -167,7 +167,7 @@ func basicDemo() {
 		fmt.Println("even")
 	}
 
-	switch age:=30; {
+	switch age := 30; {
 	case age < 20:
 		fmt.Println("young")
 	default:
@@ -175,8 +175,8 @@ func basicDemo() {
 	}
 
 label:
-	for i := 0 ; i < 10 ; i++ {
-		for j  := 0 ; j < 10 ; j++ {
+	for i := 0; i < 10; i++ {
+		for j := 0; j < 10; j++ {
 			break label
 			fmt.Println("aaa")
 		}
@@ -195,7 +195,7 @@ label2:
 
 	type people struct {
 		name string
-		age int
+		age  int
 	}
 
 	ppp := &people{"aaa", 123}
@@ -213,8 +213,8 @@ label2:
 	fmt.Println(arrr1)
 	fmt.Println(arrr)
 
-	arr5 := [...]int{1,2,3,4,5,6}
-	fmt.Println(len(arr5)) 
+	arr5 := [...]int{1, 2, 3, 4, 5, 6}
+	fmt.Println(len(arr5))
 
 	slice1 := arr5[:]
 	slice1[3] = 100
@@ -241,7 +241,7 @@ label2:
 
 	fmt.Println(appendC)
 
-	sliceA = []int{1,2,3,4,5}
+	sliceA = []int{1, 2, 3, 4, 5}
 	sliceB = make([]int, 4, 4)
 	copy(sliceB, sliceA)
 	fmt.Println(sliceB, sliceA)
@@ -256,22 +256,21 @@ label2:
 		fmt.Println(k, v)
 	}
 
-	var userinfo=make([]map[string]string, 3, 3)
+	var userinfo = make([]map[string]string, 3, 3)
 	fmt.Println(userinfo[0] == nil)
 	userinfo[0] = make(map[string]string)
 
 	type calc func(int, int) int
 	var cal calc = add
-	fmt.Println(cal(1,2))
+	fmt.Println(cal(1, 2))
 }
 
 func add(x int, y int) int {
-	return x+y
+	return x + y
 }
 
-	
 func sub(x, y int) int {
-	return x-y
+	return x - y
 }
 
 func fn1() {
@@ -287,7 +286,7 @@ func readFile(fileName string) error {
 	if fileName == "main.go" {
 		return nil
 	} else {
-		return errors.New("file fails");
+		return errors.New("file fails")
 	}
 }
 
@@ -377,23 +376,22 @@ func demoProto() {
 		Age:  10,
 		From: "China",
 	}
-	fmt.Println("原始数据:",p)
+	fmt.Println("原始数据:", p)
 	dataMarshal, err := proto.Marshal(p)
 	if err != nil {
-			fmt.Println("proto.Unmarshal.Err: ", err)
-			return
+		fmt.Println("proto.Unmarshal.Err: ", err)
+		return
 	}
-	fmt.Println("编码数据:",dataMarshal)
+	fmt.Println("编码数据:", dataMarshal)
 	// 反序列化
-	entity := pb.Person{} 
+	entity := pb.Person{}
 	err = proto.Unmarshal(dataMarshal, &entity)
 	if err != nil {
-			fmt.Println("proto.Unmarshal.Err: ", err)
-			return
+		fmt.Println("proto.Unmarshal.Err: ", err)
+		return
 	}
 
-
-	fmt.Printf("解码数据: 姓名：%s 年龄：%d 国籍：%s ", entity.GetName(),entity.GetAge(),entity.GetFrom())
+	fmt.Printf("解码数据: 姓名：%s 年龄：%d 国籍：%s ", entity.GetName(), entity.GetAge(), entity.GetFrom())
 
 }
 
@@ -422,10 +420,10 @@ type Address2 struct {
 }
 
 type Student struct {
-	ID int
+	ID     int
 	Gender string
-	Name string
-	Sno string
+	Name   string
+	Sno    string
 }
 
 func main() {
@@ -435,7 +433,7 @@ func main() {
 	// demoProto()
 
 	// s := student{
-	// 	name: "xxxx",
+	//	name: "xxxx",
 	// }
 	// fmt.Printf("%p\n", &s)
 	// s.sayHello()
@@ -446,11 +444,11 @@ func main() {
 	// fmt.Printf("%#v\n", user)
 	// fmt.Println(user.Address1.room)
 
-	var s1 = Student {
-		ID: 123,
+	var s1 = Student{
+		ID:     123,
 		Gender: "male",
-		Name: "mansi",
-		Sno: "s0001",
+		Name:   "mansi",
+		Sno:    "s0001",
 	}
 
 	jsonByte, _ := json.Marshal(s1)
