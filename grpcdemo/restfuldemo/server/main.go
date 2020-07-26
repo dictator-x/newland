@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/dictator-x/newland/grpc/restfuldemo/pb"
+	"github.com/dictator-x/newland/grpcdemo/restfuldemo/pb"
 	"google.golang.org/grpc"
 	"log"
 	"net"

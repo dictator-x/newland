@@ -1,0 +1,23 @@
+syntax = "proto2";
+package pb;
+
+import "gogoproto/gogo.proto";
+
+option (gogoproto.gostring_all) = true;
+option (gogoproto.goproto_stringer_all) = false;
+option (gogoproto.stringer_all) =  true;
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+
+// For tests
+option (gogoproto.testgen_all) = true;
+option (gogoproto.equal_all) = true;
+option (gogoproto.populate_all) = true;
+
+// This is the message sent to the cloud server
+message ClientMessage {
+  required string field1 = 1 [(gogoproto.nullable) = false];
+  required string field2 = 2 [(gogoproto.nullable) = false];
+  required int64 timestamp = 3 [(gogoproto.nullable) = false];
+}

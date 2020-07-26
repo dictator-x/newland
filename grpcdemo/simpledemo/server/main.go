@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	pb2 "github.com/dictator-x/newland/grpc/demo/pb"
+	pb2 "github.com/dictator-x/newland/grpcdemo/simpledemo/pb"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -27,6 +27,6 @@ func main() {
 
 	s := grpc.NewServer()
 	pb2.RegisterGreeterServer(s, &server{})
-	log.Println("Demo grpc server start")
+	log.Println("Demo grpcdemo server start")
 	s.Serve(lis)
 }

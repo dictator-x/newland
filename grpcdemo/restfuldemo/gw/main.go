@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/dictator-x/newland/grpc/restfuldemo/pb"
+	"github.com/dictator-x/newland/grpcdemo/restfuldemo/pb"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
