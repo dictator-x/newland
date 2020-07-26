@@ -1,0 +1,19 @@
+//Generate gateway: protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.9.5/third_party/googleapis --grpc-gateway_out=logtostderr=true:. server.proto
+//Generate service:  protoc -I. -I$GOPATH/src -I$GOPATH/pkg/mod/github.com/grpc-ecosystem/grpc-gateway@v1.9.5/third_party/googleapis --go_out=plugins=grpc:. server.proto
+syntax = "proto3";
+package pb;
+
+import "google/api/annotations.proto";
+
+message StringMessage {
+  string value = 1;
+}
+
+service Gateway {
+  rpc Echo(StringMessage) returns (StringMessage) {
+    option (google.api.http) = {
+      post: "/v1/example/echo"
+      body: "*"
+    };
+  }
+}
