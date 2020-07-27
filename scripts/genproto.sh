@@ -12,7 +12,6 @@ if [[ $(protoc --version | cut -f2 -d' ') != "3.7.1" ]]; then
 	exit 255
 fi
 
-#=$1
 export GO111MODULE=off
 # set up self-contained GOPATH for building
 export GOPATH=${PWD}/gopath.proto
